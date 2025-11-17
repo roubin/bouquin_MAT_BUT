@@ -1,0 +1,245 @@
+%!TEX root = main.tex
+
+\chapter{Calcul d'erreurs}
+\label{chapter:calc-erreurs}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calcul d'erreurs absolues et relatives}
+
+
+Nous verrons ici comment estimer une erreur faite sur l’estimation d’une grandeur lorsqu'il est possible d'avoir une expression théorique de cette grandeur en fonction d'autres variables elles-mêmes sujettes à des incertitudes.
+Cette quantification d’erreur est très importante et absolument fondamentale lorsqu'on mesure expérimentalement une grandeur. Elle permet un regard objectif sur le domaine de validité et les incertitudes sur les ordres de grandeur des mesures.
+
+
+En guise d'illustration, prenons une situation que nous avons déjà rencontrée en TP de Mécanique des Structures. La flèche $f$ en milieu de portée d'une poutre de longueur $L$, de poids linéique $q$, et de section carrée $b^2$, posée sur deux appuis est :
+%
+$$
+\displaystyle f = \frac{qL^4}{6.4\, E b^4}
+$$
+%
+Si nous souhaitons faire une mesure expérimentale du module d'Young $E$ de son matériau, on peut faire une petite expérience, et calculer $E$ comme suit :
+$$
+E = E(q,L,f,b) = \frac{qL^4}{6.4\, f b^4}
+$$
+%
+La question est alors : quelle précision peut-on espérer obtenir sur la valeur de $E$ que l'on aura déterminée à partir de $q$, $L$, $b$ et une mesure de $f$ ?
+
+
+Pour y répondre, nous avons besoin d'une notion de calcul différentiel (que nous ne détaillerons pas) :
+%
+$$
+\displaystyle
+\phi(x_1,\ x_2,\ \cdots) \Rightarrow \Delta \phi(x_1,\ x_2,\ \cdots) = \left\vert\frac{\partial \phi(\cdots)}{\partial x_1}\right\vert \Delta x_1 + \left\vert\frac{\partial \phi(\cdots)}{\partial x_2}\right\vert \Delta x_2 + \cdots
+$$
+De façon plus concise :
+$$
+\displaystyle
+\Delta \phi(x_1,\ x_2,\ \cdots) = \sum_{i=1}^{n} \left\vert\frac{\partial \phi(x_1,\ \cdots \ ,x_n)}{\partial x_i}\right\vert \Delta x_i 
+$$
+
+
+Cette relation permet de connaître l'erreur absolue $\Delta \phi$ que l'on fait, en fonction des estimations des incertitudes $\Delta x_i$ sur les variables dont elle dépend. Il est souvent plus intéressant d'exprimer cette erreur relativement à la valeur mesurée. Il s'agit de l'erreur relative $\Delta \phi / \phi$.
+
+On notera une grandeur quelconque $G \pm \Delta G$ pour définir sa gamme de valeurs possibles.
+
+
+Reprenons l'exemple de l'estimation de $E$ à partir de la flexion d'une poutre. Le poids linéique est $q = 25 \pm 1$~N/m, la portée est $L = 4.00 \pm 0.005$~m, le côté de section est $b = 0.050 \pm 0.001$~m, et on mesure une flèche $f = 0.010 \pm 0.002$~m. L'expression de $E$ permet de définir son erreur absolue :
+%
+$$
+\displaystyle
+\Delta E = \left\vert\frac{\partial E}{\partial q}\right\vert\Delta q + \left\vert\frac{\partial E}{\partial L}\right\vert\Delta L + \left\vert\frac{\partial E}{\partial b}\right\vert\Delta b + \left\vert\frac{\partial E}{\partial f}\right\vert\Delta f 
+$$ 
+%
+Ce qui se ré-écrit en déterminant les dérivées partielles :
+%
+$$
+\displaystyle
+\Delta E = \frac{L^4}{6.4\, f b^4}\Delta q + \frac{4qL^3}{6.4\, f b^4} \Delta L + \frac{4qL^4}{6.4\, f b^5}\Delta b + \frac{qL^4}{6.4\, f^2 b^4}\Delta f 
+$$ 
+%
+Après calcul, on a : 
+%
+$$
+\displaystyle
+\Delta E = (6.4\times10^{8}) \Delta q + (1.6\times10^{10}) \Delta L + (1.28\times10^{12}) \Delta b + (1.6\times10^{12}) \Delta f 
+$$ 
+$$
+\displaystyle
+\Delta E = (6.4\times10^{8})\times 1 + (1.6\times10^{10})\times 0.005 + (1.28\times10^{12})\times 0.001 + (1.6\times10^{12})\times 0.002 
+$$ 
+$$
+\displaystyle
+\Delta E = 5.2\times 10^{9}\text{ Pa} = 5.2\text{ GPa}
+$$ 
+%
+On peut par ailleurs calculer une valeur de $E(q,\,L,\,b,\,f) = 16$~GPa, mais compte tenu des incertitudes, on doit plutôt dire :
+%
+$$
+E = 16 \pm 5.2 \text{ GPa}
+$$
+%
+On comprend ainsi que cette façon de mesurer un module d'Young n'est pas du tout précise ! On comprend également que c'est le manque de précision sur $L$ et sur $b$ qui est le plus pénalisant, car ils apparaissent avec une puissance de 3 et 4, respectivement.
+
+
+
+\begin{exo}
+\noindent \ding{45} Quelle erreur (absolue et relative) est faite sur la surface $S = a\times b$ d'un terrain rectangulaire si ses dimensions ont la même incertitude $\Delta \ell$ ?\\
+Si $a=31$~m et $b=29$~m sont connues au mètre près, quantifier ces erreurs.
+\end{exo}
+
+
+\begin{sol}
+\noindent Erreur absolue : $\Delta S = b \Delta \ell + a \Delta \ell = (a+b)\Delta \ell $\\
+Erreur relative : $\frac{\Delta S}{S} = \frac{a+b}{ab} \Delta \ell $\\
+Application numérique : l'erreur pourra aller jusqu'à $\Delta S = (31+29) \times 1 = 60$~m$^2$, en plus ou en moins, ce qui rapporté à la surface du terrain est une erreur de $60/(31\times 29)\simeq 0.0667$, soit environ $\pm6.67$~\%.
+\end{sol}
+
+\needspace{8cm}
+\begin{exo}
+\noindent \ding{45} La fréquence de résonance $f$ d'un circuit RLC a pour expression : $ f=\frac{1}{2\pi \sqrt{LC}}$\\
+On donne : $L = 0.40\pm0.01$~henrys, et $C=(800\pm1)\times 10^{-6}$~farads.\\
+Calculer la fréquence de résonance (en hertz) et ses incertitudes absolue et relative. 
+\end{exo}
+
+
+\begin{sol}
+$$
+\Delta f = \left\vert \frac{\partial f}{\partial L} \right \vert \Delta L + \left\vert \frac{\partial f}{\partial C} \right \vert \Delta C
+$$
+$$
+\Delta f = \frac{C}{4\pi\sqrt{(CL)^3}} \Delta L + \frac{L}{4\pi\sqrt{(CL)^3}} \Delta C
+$$
+$$
+\Delta f = \frac{800\times 10^{-6}}{4\pi\sqrt{(800\times 10^{-6} \times 0.40)^3}}\times 0.01 + \frac{0.40}{4\pi\sqrt{(800\times 10^{-6} \times 0.40)^3}}\times 10^{-6} \simeq 0.12
+$$
+$$
+\boxed{f=8.90\pm0.12 \text{ Hz}}
+$$
+\end{sol}
+
+
+\begin{exo}
+\noindent \ding{45} La vitesse d'un corps lâché d'une hauteur $h$ est $v=\sqrt{2gh}$ (où $g=9.81\pm0.05$~m/s$^2$ est l'accélération de pesanteur sur terre).\\
+\begin{itemize}
+\item[\ding{45}] Quelle est la hauteur de lâcher si on mesure une vitesse d'impact au sol de $24$~m/s avec une précision de $\pm1$~m/s
+\item[\ding{45}] Si on réalise un lâcher à une hauteur de $25.0\pm0.1$~m, et qu'on mesure une vitesse d'impact de $22\pm1$~m/s, donner une estimation de $g$. 
+\end{itemize}
+\end{exo}
+
+
+\begin{sol}
+$$
+h(v,g)=\frac{v^2}{2g} \Rightarrow \tfrac{\partial}{\partial v}h(v,g) = \frac{v}{g} \text{ et } \tfrac{\partial}{\partial g}h(v,g) = \frac{-v^2}{2g^2}
+$$
+$$
+h=\frac{24^2}{2 \times 9.81} \simeq 29.36\text{ m}
+$$
+$$
+\Delta h = \frac{v}{g} \Delta v + \frac{v^2}{2g^2} \Delta g = \frac{24}{9.81} \times 1 + \frac{24^2}{2\times 9.81^2} \times 0.05 \simeq 2.60\text{ m}
+$$
+$$
+\boxed{h=29.36\pm2.60 \text{ m}}
+$$
+$$
+g(v,h)=\frac{v^2}{2h} \Rightarrow \tfrac{\partial}{\partial v}g(v,g) = \frac{v}{h} \text{ et } \tfrac{\partial}{\partial h}g(v,g) = \frac{-v^2}{2h^2}
+$$
+$$
+g=\frac{22^2}{2 \times 25} = 9.68\text{ m/s}^2
+$$
+$$
+\Delta g = \frac{v}{h} \Delta v + \frac{v^2}{2h^2} \Delta h = \frac{22}{25} \times 1 + \frac{22^2}{2\times 25^2} \times 0.1 \simeq 0.92\text{ m}
+$$
+$$
+\boxed{g=9.68\pm0.92 \text{ m/s}^2}
+$$
+\end{sol}
+
+\needspace{15cm}
+\begin{exo}
+\noindent \ding{45} Nous avons vu dans l'exercice précédant, que l'estimation de l'accélération $g$ de pesanteur sur terre était plutôt mauvaise à partir de la mesure de la vitesse d'un corps en chute libre (c'est pourtant comme ça qu'on la mesure de nos jours, mais avec un dispositif sophistiqué).
+
+Galilée est l'un des premiers à s'intéresser au mouvement des pendules simples. Il découvre en 1632 que la période $T$ du pendule ne dépend pas  de la masse qui est suspendue, mais uniquement de la longueur $L$ du fil. En 1659, Huygens trouve l'expression exacte de la période d'un pendule :
+$$
+T = 2\pi \sqrt{\frac{L}{g}}
+$$
+%
+\begin{itemize}
+\item[\ding{45}] Déterminer l’expression de $g$ en fonction de $L$ et de $T$.
+\item[\ding{45}] Déterminer l'expression donnant l'incertitude $\Delta g$ en fonction des incertitudes sur la longueur $L$ et sur le temps $T$ que met la masse pour revenir à son point de départ (notés respectivement $\Delta L$ et $\Delta T$).
+\item[\ding{45}] Un expérience permet de mesurer une période de $0.78\pm0.02$~s lorsqu'une masse de $100\pm5$~gramme est attachée au bout d'un fil de $15.0\pm0.2$~cm. Calculer l’accélération de la pesanteur en m/s$^2$ et ses incertitudes absolue et relative.
+\end{itemize}
+\end{exo}
+
+
+\begin{sol}
+$$
+g(L,T)=4L\left(\frac{\pi}{T}\right)^2
+$$
+$$
+\Delta g(L,T)= \frac{4\pi^2}{T^2} \Delta L + \frac{8L\pi^2}{T^3} \Delta T
+$$
+$$
+\Delta g = \frac{4\pi^2}{0.78^2} \times 0.002 + \frac{8\times0.15\times\pi^2}{0.78^3}\times 0.02 \simeq 0.52\text{ m/s}^2
+$$
+$$
+\boxed{g = 9.73\pm0.52\text{ m/s}^2 \qquad \frac{\Delta g}{g} = 5.3\%}
+$$
+\end{sol}
+
+\needspace{8cm}
+\begin{exo}
+\noindent Historiquement, une estimation de la circonférence de la terre a été proposée par \'Eratosthène sur la base de la figure suivante.
+
+\begin{center}
+\includegraphics[width=6cm]{figs/eratosthene.png}
+\end{center}
+
+Selon son raisonnement (pas détaillé ici), la circonférence $C$ de la terre pouvait être calculée à partir de la distance $D$ entre Alexandrie et Syène, et l'angle $\theta$ (en degré) :  
+$$
+C = \frac{360^\circ}{\theta}D
+$$
+
+La distance entre Syène et Alexandrie était de $D=789\pm40$~km (sauf qu'à l'époque elle se mesurait en nombre de stades), 
+et l'angle $\theta$ pouvait être déterminer en mesurant l'ombre portée d'un bâton (gnomon) au moment où les rayons de soleil arrivaient au fond d'un puis à Syène (comme sur la figure).
+\begin{itemize}
+\item[\ding{45}] On mesure une ombre portée de $L = 12.5\pm0.5$~cm d'un bâton d'un mètre. Que vaut l'angle $\theta$ et son incertitude $\Delta \theta$ en degré ?\\
+Rappel : $\displaystyle \frac{\text{d}}{\text{d}x} \tan^{-1} \, (x) = \frac{1}{1+x^2}$
+\item[\ding{45}] Quelle est donc la circonférence $C$ de la terre, et quelle erreur absolue commet-on sur cette estimation ?
+\end{itemize}
+
+\end{exo}
+
+
+\begin{sol}
+$$ 
+\tan \theta = \frac{L}{100} \Rightarrow \theta(L) = \tan^{-1} \left( \frac{L}{100} \right) = \tan^{-1} \left( \frac{12.5}{100} \right) \simeq \boxed{7.125\text{ degré}}
+$$
+$$
+\frac{\partial}{\partial L} \theta(L) =\frac{1}{1+\frac{L^2}{100^2}} \times \frac{1}{100} = \frac{1}{100+\frac{L^2}{100}}
+= \frac{1}{100+\frac{(12.5)^2}{100}} \simeq 0.01
+$$
+$$
+\Delta \theta = \frac{\partial \theta(L)}{\partial L}  \Delta L = 0.01 \times 0.5 = \boxed{0.005\text{ degré}}
+$$
+$$
+\boxed{\theta = 7.125\pm0.005\text{ degré}}
+$$
+$$
+C = \frac{360}{7.125}\times 789 = \boxed{39865\text{ km}}
+$$
+$$
+\frac{\partial C(\theta, D)}{\partial \theta} = -\frac{360}{\theta^2}D
+\quad\text{et}\quad
+\frac{\partial C(\theta, D)}{\partial D} = \frac{360}{\theta}
+$$
+$$
+\Delta C = \frac{360}{\theta^2}D \times \Delta \theta  +   \frac{360}{\theta}  \times \Delta D
+= \frac{360}{7.125^2}789 \times 0.005  +   \frac{360}{7.125}  \times 40 \simeq \boxed{28 + 2021 = 2049\text{ km}}
+$$
+Donc la circonférence de la terre est estimée à $\boxed{39865\pm2049\text{ km}}$, ce qui correspond très bien aux estimations actuelles de l'ordre de 40000~km à l'équateur ou par les pôles. On peut remarquer que l'erreur la plus pénalisante vient de l'estimation de la distance $D$ et que l'erreur sur l'angle $\theta$ est très faible. 
+
+En terme d'erreur relative : $\Delta C/C = \Delta C_\theta/C + \Delta C_D/C = 0.1\%+ 5.0\% = 5.1\%$ 
+\end{sol}
+

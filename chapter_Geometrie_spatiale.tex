@@ -1,0 +1,757 @@
+%!TEX root = main.tex
+
+\chapter{Géométrie analytique tridimensionnelle}
+\label{chapter:geospace}
+
+
+\section{Introduction}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Produits scalaire et vectoriel (rappels et extension tridimensionnelle)}
+
+
+Il existe différentes solutions pour définir un vecteur. La solution la plus couramment rencontrée est la connaissance de ses composantes dans un système cartésien bidimensionnel (2D) ou tridimensionnel (3D). 
+En physique, ces composantes auront la même unité que le vecteur ; par exemple, des mètres, des newtons, des pascals, etc.
+Une autre solution, plutôt utilisée en configuration 2D, est de se donner \uuline{la norme}, \uline{le sens} et l'\uwave{inclinaison} du vecteur. Par exemple, on peut définir un vecteur force ainsi : ``une force \uwave{verticale} de \uuline{2~kN} \uline{vers le bas}''.
+
+
+Le \textbf{produit scalaire} est une opération de multiplication entre deux vecteurs dont le résultat est un scalaire (c'est-à-dire un simple nombre). Le symbole de cette multiplication est un point.
+%
+\begin{enumerate}
+\item Si les composantes sont connues
+%
+\begin{equation*}
+\vv{a}\cdot \vv{b} = \begin{pmatrix} a_x\\a_y\\a_z \end{pmatrix} \cdot \begin{pmatrix} b_x\\b_y\\b_z \end{pmatrix}
+= a_x \times b_x + a_y \times b_y + a_z \times b_z
+\end{equation*}
+
+\item Si les normes et les orientations des deux vecteurs sont connues
+%
+\begin{equation*}
+\vv{a} \cdot \vv{b} = \Vert\vv{a}\Vert \times \Vert\vv{b}\Vert \times \cos(\vv{a},\vv{b})
+\end{equation*}
+\end{enumerate}
+%
+Le produit scalaire est commutatif : $\vv{a} \cdot \vv{b} = \vv{b} \cdot \vv{a}$. Il est utile en géométrie pour réaliser des projections. La valeur projetée du vecteur $\vv{a}$ sur une direction donnée par le vecteur unitaire $\vv{u}$ est $\vv{a} \cdot \vv{u}$.
+
+La \textbf{norme} d'un vecteur est définie, de façon similaire aux simples nombres réels, comme ``la racine carré de son carré'' : 
+\begin{equation*}
+\Vert \vv{a} \Vert = \sqrt{\vv{a}^{\, 2}} = \sqrt{\vv{a}\cdot\vv{a}} = \sqrt{a_x^2+a_y^2+a_z^2}
+\end{equation*}
+
+
+\begin{exo}
+
+\noindent \ding{45} Calculer la norme $\Vert \vv{v} \Vert = \sqrt{v_x^2 + v_y^2 + v_z^2}$ des vecteurs suivants pour en déduire le vecteur $\vv{u}_v$ de norme unitaire associé (on dira qu'on ``normalise'' le vecteur $\vv{v} \rightarrow \vv{u}_v = \vv{v}/\Vert\vv{v}\Vert$.
+
+\begin{tasks}(3)
+\task $\vv{v}=\begin{pmatrix} 3 \\ 2 \end{pmatrix}$
+\task $\vv{v}=\begin{pmatrix} 2 \\ 4 \end{pmatrix}$
+\task $\vv{v}=\begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix}$
+\task $\vv{v}=\begin{pmatrix} 3 \\ 2 \\ 1 \end{pmatrix}$
+\task $\vv{v}=\begin{pmatrix} \pi \\ 2\pi \end{pmatrix}$
+\end{tasks}
+
+\end{exo}
+
+
+\begin{sol}
+\begin{tasks}(1)
+\task $\left \Vert \begin{pmatrix} 3 \\ 2 \end{pmatrix} \right \Vert = \sqrt{9+4} = \sqrt{13}$ se normalise en $\begin{pmatrix} 3/\sqrt{13} \\ 2/\sqrt{13} \end{pmatrix}$
+\task $\left \Vert\begin{pmatrix} 2 \\ 4 \end{pmatrix}\right \Vert = \sqrt{4+16} = \sqrt{20} = 2\sqrt{5}$ se normalise en $\begin{pmatrix} 1/\sqrt{5} \\ 2/\sqrt{5} \end{pmatrix}$
+\task $\left \Vert\begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix}\right \Vert = \sqrt{16} = 4$ se normalise en $\begin{pmatrix} 1/2 \\ 1/2 \\ 1/2 \end{pmatrix}$
+\task $\left \Vert\begin{pmatrix} 3 \\ 2 \\ 1 \end{pmatrix}\right \Vert = \sqrt{9+4+1} = \sqrt{14}$ se normalise en $\begin{pmatrix} 3/\sqrt{14} \\ 2/\sqrt{14} \\ 1/\sqrt{14} \end{pmatrix}$
+\task $\left \Vert\begin{pmatrix} \pi \\ 2\pi \end{pmatrix}\right \Vert = \sqrt{\pi^2+4\pi^2} = \pi\sqrt{5}$ se normalise en $\begin{pmatrix} 1/\sqrt{5} \\ 2/\sqrt{5} \end{pmatrix}$
+\end{tasks}
+\end{sol}
+
+
+
+Pour calculer la valeur projetée $a_u$ d'un vecteur $\vv{a}$ sur une droite de vecteur directeur unitaire $\vv{u}$, il suffit de faire une multiplication scalaire : $a_u = \vv{a}\cdot\vv{u}$.
+
+Si le vecteur directeur $\vv{d}$ de la droite sur laquelle on veut projeter n'est pas unitaire (c'est-à-dire que sa norme n'est pas égale à 1), alors il faut préalablement le normaliser : 
+%
+\begin{equation*}
+a_d = \vv{a}\cdot \frac{\vv{d}}{\Vert \vv{d} \Vert} = \frac{\vv{a}\cdot\vv{d}}{\Vert \vv{d} \Vert}
+\end{equation*}
+
+Pour calculer le vecteur projeté $\vv{a}_u$ d'un vecteur $\vv{a}$ sur une droite de vecteur directeur unitaire $\vv{u}$, il suffit de multiplier le vecteur unitaire $\vv{u}$ par la valeur projetée $a_u$ : $\vv{a}_u = a_u \vv{u}$.
+
+Si le vecteur directeur $\vv{d}$ de la droite sur laquelle on veut projeter n'est pas unitaire, alors il faut préalablement le normaliser (le rendre unitaire) :
+%
+\begin{equation*}
+\displaystyle \vv{a}_d = a_u \times \frac{\vv{d}}{\Vert \vv{d} \Vert} = \frac{\vv{a}\cdot\vv{d}}{\Vert \vv{d} \Vert} \times \frac{\vv{d}}{\Vert \vv{d} \Vert} = \frac{(\vv{a}\cdot\vv{d})}{\Vert \vv{d} \Vert^2} \times \vv{d}
+\end{equation*}
+
+
+\begin{exo}
+
+\noindent \ding{45} Déterminer la valeur projetée $v_{AB}$ du vecteur $\vv{v}$ sur la droite $(AB)$ à l'aide des données suivantes.
+
+\begin{tasks}[item-indent=4pt, column-sep=2em](2)
+\task $\vv{v} = \begin{pmatrix} 3 \\ 2 \end{pmatrix}$ et $\vv{AB} = \begin{pmatrix} -1 \\ 1 \end{pmatrix}$
+\task $\vv{v} = \begin{pmatrix} -2 \\ 2 \end{pmatrix}$ et $\vv{AB} = \begin{pmatrix} 10 \\ 0 \end{pmatrix}$
+\task $\vv{v} = \begin{pmatrix} 2 \\ 3 \\ 1 \end{pmatrix}$  et $\vv{AB} = \begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix}$
+\task $\vv{v} = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}$, $\vv{OA} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$ et $\vv{OB} = \begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix}$
+\end{tasks}
+
+\end{exo}
+
+
+\begin{sol}
+\begin{tasks}(1)
+\task $\displaystyle v_{AB}=\begin{pmatrix} 3 \\ 2 \end{pmatrix} \cdot \begin{pmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix} = \frac{-3}{\sqrt{2}} +  \frac{2}{\sqrt{2}} =  \frac{-1}{\sqrt{2}}$
+\task $\displaystyle v_{AB}=\begin{pmatrix} -2 \\ 2 \end{pmatrix} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} = -2$
+\task $\displaystyle v_{AB}=\begin{pmatrix} 2 \\ 3 \\ 1 \end{pmatrix} \cdot \begin{pmatrix} 1/\sqrt{2} \\ 0  \\ -1/\sqrt{2} \end{pmatrix} = \frac{2}{\sqrt{2}} - \frac{1}{\sqrt{2}} = \frac{1}{\sqrt{2}} $
+\task $\displaystyle v_{AB}=\begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} \cdot \begin{pmatrix} 0 \\ -1/\sqrt{5}  \\ -2/\sqrt{5} \end{pmatrix} = \frac{-1}{\sqrt{5}} - \frac{6}{\sqrt{5}} = \frac{-7}{\sqrt{5}} $
+\end{tasks}
+\end{sol}
+
+\needspace{4cm}
+
+\begin{exo}
+
+\noindent \ding{45} Déterminer la force projetée $\vv{F}_{AB}$ de la force $\vv{F}$ sur la droite $(AB)$ à l'aide des données suivantes.
+
+\begin{tasks}(2)
+\task $\vv{F} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$ et $\vv{AB} = \begin{pmatrix} 2 \\ -1 \end{pmatrix}$
+\task $\vv{F} = \begin{pmatrix} qa \\ T \end{pmatrix}$ et $\vv{AB} = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix}$
+\task $\vv{F} = \begin{pmatrix} 1 \\ 2 \\ 2 \end{pmatrix}$  et $\vv{AB} = \begin{pmatrix} -1 \\ 1 \\ 0 \end{pmatrix}$
+\task $\vv{F} = \begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix}$  et $\vv{AB} = \begin{pmatrix} 1 \\ -1 \\ 2 \end{pmatrix}$
+\task*(2) $\vv{F} = \begin{pmatrix} qL \\ T \\ T\cos(\alpha) \end{pmatrix}$, $\vv{OA} = \begin{pmatrix} 1 \\ 3 \\ 3 \end{pmatrix}$ et $\vv{OB} = \begin{pmatrix} 2 \\ 3 \\ 2 \end{pmatrix}$
+\end{tasks}
+
+\end{exo}
+
+
+\begin{sol}
+\begin{tasks}(1)
+\task $\displaystyle \vv{F}_{AB} = \left \{ \begin{pmatrix} 2 \\ 3 \end{pmatrix}\cdot \begin{pmatrix} 2/\sqrt{5} \\ -1/\sqrt{5} \end{pmatrix} \right \} \begin{pmatrix} 2/\sqrt{5} \\ -1/\sqrt{5} \end{pmatrix} = \frac{4-3}{\sqrt{5}} \begin{pmatrix} 2/\sqrt{5} \\ -1/\sqrt{5} \end{pmatrix} = \begin{pmatrix} 2/5 \\ -1/5 \end{pmatrix} $
+\task $\displaystyle \vv{F}_{AB} = \left \{ \begin{pmatrix} qa \\ T \end{pmatrix}\cdot \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix} \right \} \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix} = \frac{qa+T}{\sqrt{2}} \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix} = \begin{pmatrix} (qa+T)/2 \\ (qa+T)/2 \end{pmatrix} = \frac{qa+T}{2} \begin{pmatrix} 1 \\ 1 \end{pmatrix}$
+\task $\displaystyle \vv{F}_{AB} = \left \{ \begin{pmatrix} 1 \\ 2 \\ 2 \end{pmatrix}\cdot \begin{pmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \\ 0 \end{pmatrix} \right \} \begin{pmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \\ 0 \end{pmatrix} = \frac{-1+2}{\sqrt{5}} \begin{pmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \\ 0 \end{pmatrix} = \begin{pmatrix} -1/2 \\ 1/2 \\ 0 \end{pmatrix} $
+\task $\displaystyle \vv{F}_{AB} = \left \{ \begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix}\cdot \begin{pmatrix} 1/\sqrt{6} \\ -1/\sqrt{6} \\ 2/\sqrt{6} \end{pmatrix} \right \} \begin{pmatrix} 1/\sqrt{6} \\ -1/\sqrt{6} \\ 2/\sqrt{6} \end{pmatrix} = \frac{-1}{\sqrt{6}}\begin{pmatrix} 1/\sqrt{6} \\ -1/\sqrt{6} \\ 2/\sqrt{6} \end{pmatrix} = \begin{pmatrix} -1/6 \\ 1/6 \\ -2/6 \end{pmatrix} $
+\task $\displaystyle \vv{F}_{AB} = \left \{ \begin{pmatrix} qL \\ T \\ T\cos(\alpha) \end{pmatrix}\cdot \begin{pmatrix} 1/\sqrt{2} \\ 0 \\ -1/\sqrt{2} \end{pmatrix} \right \} \begin{pmatrix} 1/\sqrt{2} \\ 0 \\ -1/\sqrt{2} \end{pmatrix} = \frac{qL-T\cos(\alpha)}{2}\begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix} $
+\end{tasks}
+\end{sol}
+
+
+Le \textbf{produit vectoriel} est une autre opération de multiplication entre deux vecteurs. Elle est très utile en géométrie (mais pas uniquement). Le résultat d'un produit vectoriel est un vecteur, de direction perpendiculaire à chacun des vecteurs multipliés, et dont le sens est donné par la ``règle de la main droite'' : 
+%
+\begin{center}
+\includegraphics[width=4cm]{figs/right_hand.jpg}
+\end{center}
+%
+Dans l'ordre dans lequel on dit ``$\,\vv{u}$ vectoriel $\vv{v}$ égal $\vv{u}\wedge\vv{v}\ $'', on pense ``$1\wedge2 = 3$'', ce qui correspond à l'ordre des doigts de la main \textbf{droite} : pouce, index, majeur. La direction du majeur est alors la direction de $\vv{u}\wedge\vv{v}$. La norme de $\vv{u}\wedge\vv{v}$ est :
+%
+\begin{equation*}
+\Vert \vv{u}\wedge\vv{v} \Vert = \Vert \vv{u} \Vert \times \Vert \vv{v} \Vert \times \vert \sin(\vv{u}, \vv{v}) \vert
+\end{equation*}
+
+Il est également possible de faire l'opération de produit vectoriel à partir des composantes des vecteurs :
+%
+\begin{equation*}
+\vv{a} \times \vv{b} = \vv{a} \wedge \vv{b} =
+\begin{pmatrix} a_x \\ a_y \\ a_z \end{pmatrix} \wedge
+\begin{pmatrix} b_x \\ b_y \\ b_z \end{pmatrix}
+=
+\begin{pmatrix} a_y b_z - a_z b_y  \\ a_z b_x - a_x b_z \\ a_x b_y - a_y b_x \end{pmatrix}
+\end{equation*}
+
+\needspace{5cm}
+Nous verrons en TD comment ``retenir'' cette formule. Remarquons que le symbol utilisé en france est $\wedge$, alors que la croix $\times$ est plus communément utilisée dans le reste du monde. 
+
+
+\begin{exo}
+
+\noindent \ding{45} Calculer les produits vectoriels suivants
+
+\begin{tasks}(2)
+\task $\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \wedge
+\begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix} $
+\task $\begin{pmatrix} -1 \\ 4 \\ 2 \end{pmatrix} \wedge
+\begin{pmatrix} 1 \\ 0 \\ 5 \end{pmatrix} $
+\task $\begin{pmatrix} 1 \\ 1 \\ 5 \end{pmatrix} \wedge
+\begin{pmatrix} -1 \\ -2 \\ 2 \end{pmatrix} $
+\task $\begin{pmatrix} -5 \\ 2 \\ 1 \end{pmatrix} \wedge
+\begin{pmatrix} -1 \\ -2 \\ 3 \end{pmatrix} $
+\end{tasks}
+\end{exo}
+
+
+\begin{sol}
+\begin{tasks}(1)
+\task $\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \wedge
+\begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix} =  \begin{pmatrix} 2-6 \\ -3-1 \\ 2-(-2) \end{pmatrix} =  \begin{pmatrix} -4 \\ -4 \\ 4 \end{pmatrix} $
+\task $\begin{pmatrix} -1 \\ 4 \\ 2 \end{pmatrix} \wedge
+\begin{pmatrix} 1 \\ 0 \\ 5 \end{pmatrix} =  \begin{pmatrix} 20-0 \\ 2-(-5) \\ 0-4 \end{pmatrix}=  \begin{pmatrix} 20 \\ 7 \\ -4 \end{pmatrix}$
+\task*(2) $\begin{pmatrix} 1 \\ 1 \\ 5 \end{pmatrix} \wedge
+\begin{pmatrix} -1 \\ -2 \\ 2 \end{pmatrix} =  \begin{pmatrix} 2-(-10) \\ -5-2 \\ -2-(-1) \end{pmatrix}=  \begin{pmatrix} 12 \\ -7 \\ -1 \end{pmatrix}$
+\task*(2) $\begin{pmatrix} -5 \\ 2 \\ 1 \end{pmatrix} \wedge
+\begin{pmatrix} -1 \\ -2 \\ 3 \end{pmatrix} =  \begin{pmatrix} 6 -(-2)\\ -1-(-15) \\ 10-(-2) \end{pmatrix}=  \begin{pmatrix} 8 \\ 14 \\ 12 \end{pmatrix}$
+\end{tasks}
+\end{sol}
+
+
+La surface (l'aire) d'un triangle peut être déterminée comme la moitié de la norme du produit vectoriel des vecteurs formés par deux de ses cotés. 
+La surface $S$ du triangle formé par les vecteurs $\vv{C}_1$ et $\vv{C}_2$ est :
+%
+\begin{equation*}
+S = \frac{1}{2} \Vert \vv{C}_1 \wedge \vv{C}_2 \Vert
+\end{equation*}
+
+En particulier, l'aire d'un triangle $ABC$ peut se calculer avec l'une des formules suivantes (et bien d'autres).
+
+\begin{equation*}
+S = \frac{1}{2} \Vert \vv{AB} \wedge \vv{AC} \Vert = \frac{1}{2} \Vert \vv{BA} \wedge \vv{BC} \Vert
+= \frac{1}{2} \Vert \vv{CA} \wedge \vv{CB} \Vert
+\end{equation*}
+
+
+\begin{comment}
+Schéma d'interprétation (à faire avec l'enseignant)
+% 
+\ifthenelse{\equal{\showDrawings}{1}}{
+\begin{center}
+\includegraphics[height=4cm]{figs/SurfTriangle.png}
+\end{center}
+}{\vspace*{5cm}}
+\end{tcolorbox}
+
+\needspace{8cm}
+\end{comment}
+
+
+\begin{exo}
+
+\noindent \ding{45} Déterminer l'expression \textbf{littérale} de la surface $S$ du triangle $ABC$ sachant que...
+
+\begin{tasks}(1)
+\task $\vv{AB} = \vv{U} = \begin{pmatrix} U_x \\ U_y \end{pmatrix}$ et $\vv{BC} = \vv{V} = \begin{pmatrix} V_x \\ V_y \end{pmatrix}$
+\task $\vv{OA} = \begin{pmatrix} a_x \\ a_y \end{pmatrix}$ ; $\vv{OB} = \begin{pmatrix} b_x \\ b_y \end{pmatrix}$ ; $\vv{OC} = \begin{pmatrix} c_x \\ c_y \end{pmatrix}$
+\task $\vv{AB} = \begin{pmatrix} L \\ 0 \\ 1 \end{pmatrix}$ et $\vv{AC} = \begin{pmatrix} D \cos(\theta) \\ D \sin(\theta) \\ 0 \end{pmatrix}$
+\end{tasks}
+\end{exo}
+
+\begin{sol}
+\begin{tasks}(1)
+\task $S = \frac{1}{2} \left\Vert\begin{pmatrix} U_x \\ U_y \end{pmatrix} \wedge \begin{pmatrix} V_x \\ V_y \end{pmatrix} \right\Vert = \frac{1}{2} \left\vert U_x V_y - U_y V_x \right\vert $
+\task $S  =  \frac{1}{2} \left\Vert\begin{pmatrix} b_x-a_x \\ b_y-a_y \end{pmatrix} \wedge \begin{pmatrix} c_x-a_x \\ c_y-a_y \end{pmatrix} \right\Vert = \frac{1}{2} \left\vert (b_x-a_x) (c_y-a_y) - (b_y-a_y) (c_x-a_x)\right\vert$
+\task $S = \frac{1}{2} \left\Vert \begin{pmatrix} L \\ 0 \\ 1 \end{pmatrix} \wedge \begin{pmatrix} D \cos(\theta) \\ D \sin(\theta) \\ 0 \end{pmatrix} \right\Vert = \left\Vert \begin{pmatrix} -D\sin(\theta) \\ D\cos(\theta) \\ LD\sin(\theta) \end{pmatrix}\right\Vert = \sqrt{ D^2 \big(\cos^2(\theta) + (1 + L^2) \sin^2 (\theta) \big)}$
+\end{tasks}
+\end{sol}
+
+Rappelons, si cela est utile, que 
+%
+\begin{equation*}
+\vv{a} \cdot \vv{b} = 0 \Rightarrow \text{les vecteur sont orthogonaux}
+\end{equation*}
+%
+\begin{equation*}
+\vv{a} \wedge \vv{b} = \vv{0} \Rightarrow \text{les vecteur sont colinéaires}
+\end{equation*}
+
+Si les vecteurs $\vv{a}$ et $\vv{b}$ portent des droites, l'application pratique sera de déterminer si ces droites sont perpendiculaires ou parallèles. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equation cartésienne d'un plan}
+
+
+Soit un plan ($P$) de normale $\vv{n} = (n_x,\ n_y,\ n_z)^T$ et passant par le point $A$, de coordonnée $\vv{OA} = (A_x,\ A_y,\ A_z)^T$. Pour qu'un point $M$, de coordonnées cartésiennes $\vv{OM} = (x,\ y,\ z)^T$ appartienne au plan ($P$), il est nécessaire que :
+%
+\begin{equation*}
+\vv{AM} \cdot \vv{n} = 0
+\Rightarrow
+(\vv{OM}-\vv{OA}) \cdot \vv{n} = 0
+\Rightarrow
+\begin{pmatrix} x-A_x \\ y-A_y \\ z-A_z \end{pmatrix}
+\cdot
+\begin{pmatrix} n_x \\ n_y \\ n_z \end{pmatrix} = 0
+\end{equation*}
+%
+Ceci se développe en
+%
+\begin{equation*}
+(x-A_x)n_x + (y-A_y)n_y + (z-A_z)n_z = 0
+\end{equation*}
+%
+\begin{equation*}
+\Rightarrow n_x x  + n_y y  + n_z z - (A_x n_x + A_y n_y + A_z n_z) = 0
+\end{equation*}
+%
+On voit donc que l'équation cartésienne d'un plan passant par $A$ et de normale $\vv{n}$ (pas nécessairement de norme unitaire) est :
+\begin{equation*}
+a x  + b y  + c z + d = 0
+\end{equation*}
+%
+avec $a=n_x$, $b=n_y$, $c=n_z$ et $d=-\vv{OA}\cdot \vv{n}$.
+
+
+
+\begin{comment}
+Schéma d'interprétation (à faire avec l'enseignant)
+%
+\ifthenelse{\equal{\showDrawings}{1}}{
+\begin{center}
+\includegraphics[height=6cm]{figs/eqPlan.png}
+\end{center}
+}{\vspace*{6cm}}
+\end{comment}
+
+\needspace{8cm}
+\begin{exo}
+
+\noindent \ding{45} Déterminer l'équation cartésienne du plan...
+
+\begin{tasks}(1)
+\task passant par le point $A= \begin{pmatrix} -2 \\ 0 \\ 5\end{pmatrix}$ et de normale $\vv{n} = \begin{pmatrix} 2 \\ -6 \\ 4 \end{pmatrix}$ 
+\task passant par les points $A= \begin{pmatrix} 1 \\ -2 \\ 7\end{pmatrix}$, $B= \begin{pmatrix} 2 \\ 2 \\ 1\end{pmatrix}$ et $C= \begin{pmatrix} 1 \\ 1 \\ 5\end{pmatrix}$
+\task tangent à une sphère de rayon $3\sqrt{3}$ centrée en $A= \begin{pmatrix} 1 \\ 2 \\ 3\end{pmatrix}$, et de normale $\vv{n} = \begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$
+\task tangent à une sphère de rayon $R$ centrée en $A= \begin{pmatrix} A_x \\ A_y \\ A_z\end{pmatrix}$, et de normale unitaire $\vv{n} = \begin{pmatrix} n_x \\ n_y \\ n_z \end{pmatrix}$
+\end{tasks}
+\end{exo}
+
+
+\begin{sol}
+\begin{tasks}(1)
+\task $d = -\vv{OA}\cdot\vv{n} = -(-4 + 20) = -16$, équation du plan : $2x-6y+4z-16 = 0$, qu'on peut simplifier en $\boxed{x-3y+2z-8 = 0}$
+\task $\vv{n} = \vv{AB} \wedge \vv{AC} = \begin{pmatrix} 1 \\ 4 \\ -6\end{pmatrix} \wedge \begin{pmatrix} 0 \\ 3 \\ -2\end{pmatrix} = \begin{pmatrix} 10 \\ 2 \\ 3\end{pmatrix}$, $d = -\vv{OA}\cdot\vv{n} = -(10  -4 + 21)  = -27 $, équation du plan : $\boxed{10x+2y+3z-27 = 0}$
+\task Point du plan : $\vv{OA} + 3\sqrt{3}\frac{\vv{n}}{\sqrt{3}} = \begin{pmatrix} 1+3 \\ 2+3 \\ 3-3\end{pmatrix} = \begin{pmatrix} 4 \\ 5 \\ 0\end{pmatrix}$, $d=- \begin{pmatrix} 4 \\ 5 \\ 0\end{pmatrix}\cdot\begin{pmatrix} 1 \\ 1 \\ -1\end{pmatrix}= -(4+5)= -9$, équation du plan : $\boxed{x+y-z-9=0}$
+\task Point du plan : $\vv{OA} + R\vv{n}$, $d=-(\vv{OA} + R\vv{n})\cdot\vv{n} = -(\vv{OA}\cdot\vv{n} + R\vv{n}\cdot\vv{n})$, équation du plan : $\boxed{n_x x+n_y y-n_z z -(\vv{OA}\cdot\vv{n} + R\vv{n}^2) =0}$
+\end{tasks}
+\end{sol}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\needspace{8cm}
+\section{Equations paramétrique et cartésienne d'une droite}
+
+
+
+Soit une droite ($D$) de vecteur directeur $\vv{d} = (d_x,\ d_y,\ d_z)^T$ et passant par le point $A$, de coordonnée $\vv{OA} = (A_x,\ A_y,\ A_z)^T$. Pour qu'un point $M$, de coordonnées cartésiennes $\vv{OM} = (x,\ y,\ z)^T$ appartienne à la droite ($D$), il est nécessaire que :
+%
+\begin{equation*}
+\vv{AM} = k \vv{d} \quad (\text{avec } k \in \mathbb{R})
+\Rightarrow
+\begin{pmatrix} x-A_x \\ y-A_y \\ z-A_z \end{pmatrix}
+= k
+\begin{pmatrix}  d_x \\  d_y \\  d_z \end{pmatrix} 
+\Rightarrow
+\begin{pmatrix} x\\ y \\ z \end{pmatrix}
+=
+\begin{pmatrix} A_x + k d_x \\ A_y + k d_y \\ A_z + k d_z \end{pmatrix}
+\end{equation*}
+%
+Notons que le vecteur directeur $\vv{d}$ n'est pas obligatoirement unitaire. 
+Les \textbf{équations paramétriques} de cette droite consistent simplement à réécrire ceci sous forme d'un système de trois équations utilisant le même paramètre $k$ :
+%
+\begin{equation*}
+\begin{cases}
+x & = A_x + k \times d_x \\
+y & = A_y + k \times d_y \\
+z & = A_z + k \times d_z
+\end{cases}
+\quad (k \in \mathbb{R})
+\end{equation*}
+
+
+\begin{comment}
+Schéma d'interprétation (à faire avec l'enseignant)
+\ifthenelse{\equal{\showDrawings}{1}}{
+\begin{center}
+\includegraphics[height=4cm]{figs/eqParamDroite.png}
+\end{center}
+}%
+{\vspace*{5cm}}% if not set to 1
+\end{comment}
+
+
+\begin{exo}
+
+
+\noindent \ding{45} Déterminer les équations paramétriques de la droite...
+
+\begin{tasks}(1)
+\task passant par le point $A= \begin{pmatrix} 2 \\ 1 \\ -3\end{pmatrix}$ et de vecteur directeur normal $\vv{u} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$
+\task passant par les points $A= \begin{pmatrix} 2 \\ 0 \\ 1\end{pmatrix}$ et $B= \begin{pmatrix} 0 \\ 3 \\ -1\end{pmatrix}$
+\end{tasks}
+\end{exo}
+
+
+\begin{sol}
+\begin{tasks}(2)
+\task $\begin{cases} x &= 2+k \\ y &= 1+k  \\ z &= -3+k \end{cases} \quad (k \in \mathbb{R})$ 
+\task $\begin{cases} x &= 2-2k \\ y &= 0+3k  \\ z &= 1-2k \end{cases} \quad (k \in \mathbb{R})$ 
+\end{tasks}
+\end{sol}
+
+
+
+\needspace{5cm}
+En remarquant qu'il existe dans les équations paramétriques d'une droite, une valeur unique du paramètre $k$ pour un point donné sur cette droite, on peut calculer $k$ de trois façons :
+%
+\begin{equation*}
+k = \frac{x - A_x}{d_x} = \frac{y - A_y}{d_y} = \frac{z - A_z}{d_z} 
+\end{equation*}
+%
+Ceci constitue une façon alternative de définir une droite par ses \textbf{équations cartésiennes} :
+%
+\begin{equation*}
+\begin{cases}
+\displaystyle \frac{x-A_x}{d_x} & = \displaystyle \frac{y-A_y}{d_y}  \\
+\displaystyle \frac{y-A_y}{d_y} & = \displaystyle \frac{z-A_z}{d_z}
+\end{cases}
+\end{equation*}
+%
+ou encore :
+%
+\begin{equation*}
+\begin{cases}
+d_y \times x - d_x \times y + (d_x \times A_y - d_y \times A_x)  & = 0  \\
+d_z \times y - d_y \times z + (d_y \times A_z - d_z \times A_y) & = 0
+\end{cases}
+\end{equation*}
+%
+Enfin, il est intéressant d'interpréter l'équation cartésienne d'une droite comme l'intersection de deux plans :
+\begin{equation*}
+\begin{cases}
+n_x \times x + n_y \times y + \text{\colorbox{lightgray}{$0 \times z$}} + d & = 0 \\
+\text{\colorbox{lightgray}{$0 \times x$}} + n_y' \times y + n_z' \times z + d' & = 0
+\end{cases}
+\end{equation*}
+
+%\needspace{10cm}
+\begin{comment}
+Schéma d'interprétation (à faire avec l'enseignant)
+%
+\ifthenelse{\equal{\showDrawings}{1}}{
+\begin{center}
+\includegraphics[height=6cm]{figs/eqCartesienneDroite3D.png}
+\end{center}
+}{\vspace*{6cm}}
+\end{comment}
+
+
+\begin{exo}
+
+\noindent \ding{45} Déterminer les équations cartésiennes pour chacun des cas de l'exercice précédent rappelés ci-après :
+
+\begin{tasks}(1)
+\task passant par le point $A= \begin{pmatrix} 2 \\ 1 \\ -3\end{pmatrix}$ et de vecteur directeur normal $\vv{u} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}$
+\task passant par les points $A= \begin{pmatrix} 2 \\ 0 \\ 1\end{pmatrix}$ et $B= \begin{pmatrix} 0 \\ 3 \\ -1\end{pmatrix}$
+\end{tasks}
+
+\end{exo}
+
+\begin{sol}
+\begin{tasks}(1)
+\task $\begin{cases} x &= 2+k \\ y &= 1+k  \\ z &= -3+k \end{cases} \Rightarrow x-2 = y-1 = z+3$.\\ 
+La première égalité s'écrit $x-y-1=0$ (en transférant tous les termes vers la gauche) et la seconde égalité se ré-écrit $y-z-4=0$. \\
+D'où les équations cartésiennes de la droite : $\boxed{\begin{cases}x-y-1&=0\\y-z-4&=0 \end{cases}}$   
+\task $\displaystyle \begin{cases} x &= 2-2k \\ y &= 0+3k  \\ z &= 1-2k \end{cases} \Rightarrow \frac{x-2}{-2} = \frac{y}{3} = \frac{z-1}{-2}$.\\ 
+D'où les équations cartésiennes de la droite : 
+$\begin{cases}\displaystyle -\frac{x}{2}-\frac{y}{3}+1&=0\\[2mm] \displaystyle \frac{y}{3}+\frac{z}{2}-\frac{1}{2}&=0 \end{cases}$ \\
+Il est interessant de simplifier l'écriture de ces équations en multipliant par une valeur bien choisie :\\[2mm]
+$\begin{cases}\displaystyle -6\times \left( -\frac{x}{2}-\frac{y}{3}+1\right) &= -6\times0  \\[2mm] \displaystyle 6\times \left(\frac{y}{3}+\frac{z}{2}-\frac{1}{2}\right)&=6\times0 \end{cases} \Rightarrow \boxed{\begin{cases} 3x +2y -6 &=0\\ 2y + 3z -3 &=0 \end{cases}}$ 
+\end{tasks}
+\end{sol}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intersections :\\ plan~$\cap$~plan (droite) et droite~$\cap$~plan (point)}
+
+
+L'intersection de deux plans ($P$) et ($P'$) en 3D est une droite ($D$) si les plans se coupent et ne sont donc pas parallèles (c'est-à-dire que leurs normales ne sont pas colinéaires). Les coordonnées $x$, $y$ et $z$ des points de la droite d'intersection ($D$) appartiennent à la fois au plan ($P$) et au plan ($P'$). Elles satisfont donc aux deux équations cartésiennes de ces plans :
+%
+$$
+\begin{cases}
+a x + b y + c z + d  & = 0  \\
+a' x + b' y + c' z + d'  & = 0 
+\end{cases}
+$$
+%
+Il s'agit ici d'un système de deux équations avec trois inconnues.
+La méthode pour trouver les équations paramétriques de la droite ($D$) consiste à poser arbitrairement $x=k$ (tout autre choix comme $z=k$ serait aussi valable). Ceci ajoute une équation au système précédent, et en remplaçant $x$ par $k$ le premier système à deux équations n'aura plus que deux inconnues (ici $y$ et $z$) :   
+%
+$$
+\begin{cases}
+x & = k \\
+\text{et} &
+\begin{cases}
+a x + b y + c z + d  & = 0  \\
+a' x + b' y + c' z + d'  & = 0 
+\end{cases}
+\end{cases}
+\quad\Rightarrow\quad
+\begin{cases}
+x & = k \\
+\text{et} &
+\begin{cases}
+b y + c z   & = -d - a k  \\
+b' y + c' z   & = -d' - a' k 
+\end{cases}
+\end{cases}
+$$
+%
+En résolvant ce système d'équations avec la méthode de son choix, il devient possible de trouver $y$ et $z$, et de se ramener à un système d'équations de la forme suivante : 
+%
+$$
+\begin{cases}
+x & = 0 + 1 \times k \\
+y & = A_y + d_y \times k  \\
+z & = A_z + d_z \times k 
+\end{cases}
+\quad (k \in \mathbb{R})
+$$
+%
+Il s'agit là des équations paramétriques de la droite d'intersection ($D$).
+
+
+\begin{comment}
+Schéma d'interprétation (à faire avec l'enseignant)
+%
+\ifthenelse{\equal{\showDrawings}{1}}{
+\begin{center}
+\includegraphics[height=6cm]{figs/intersectionPlans.png}
+\end{center}
+}{\vspace*{6cm}} 
+\end{comment}
+
+
+\begin{exo}
+
+\noindent \ding{45} Déterminer les équations paramétriques de la droite, intersection des plans $P_1$ et $P_2$.
+
+\begin{tasks}(1)
+\task $P_1 : x+y+z=0\quad$ et $\quad P_2 : 2x+3y+z-4 = 0$
+\task $P_1 : x-3y+2z=5\quad$ et $\quad P_2 : 2x+y+7z = 1$
+\task $P_1 : x+y+z+1=0\quad$ et $\quad P_2 : 2x-y-z+3 = 1$
+\end{tasks}
+
+\end{exo}
+
+\begin{sol}
+\begin{tasks}(1)
+\task $P_1 : x+y+z=0\quad$ et $\quad P_2 : 2x+3y+z-4 = 0$
+$$
+\begin{cases}
+z & = k \\
+\text{et} &
+\begin{cases}
+x+y+z  & = 0  \\
+2x+3y+z-4  & = 0 
+\end{cases}
+\end{cases}
+\Rightarrow
+\begin{cases}
+z & = k \\
+\text{et} &
+\begin{cases}
+x+y   &= -k  \\
+2x+3y   &= 4-k 
+\end{cases}
+\end{cases}
+$$
+$$
+\Rightarrow
+\begin{cases}
+z & = k \\
+\text{et} &
+\begin{cases}
+x   & = -k - y  \\
+-2(k+y)+3y  & = 4-k 
+\end{cases}
+\end{cases}
+\Rightarrow
+\boxed{
+\begin{cases}
+x   &= -4 -2k  \\
+y   &= 4 + k \\
+z & = k 
+\end{cases}
+}
+$$
+
+\task $P_1 : x-3y+2z=5\quad$ et $\quad P_2 : 2x+y+7z = 1$
+$$
+\begin{cases}
+x & = k \\
+\text{et} &
+\begin{cases}
+k-3y+2z & = 5  \\
+2k+y+7z  & = 1 
+\end{cases}
+\end{cases}
+\Rightarrow
+\begin{cases}
+x & = k \\
+\text{et} &
+\begin{cases}
+k-3y+2z   &= 5 - k  \\
+y+7z   &= 1 - 2k 
+\end{cases}
+\end{cases}
+$$
+$$
+\Rightarrow
+\begin{cases}
+x & = k \\
+\text{et} &
+\begin{cases}
+y   & = -\frac{5}{3} + \frac{2}{3}(k+z) \\
+z   & =  -\frac{7}{23}k  + \frac{8}{23}
+\end{cases}
+\end{cases}
+\Rightarrow
+\boxed{
+\begin{cases}
+x   &= k  \\
+y   &= -\frac{33}{23} + \frac{3}{23}k  \\
+z   &=  \frac{8}{23}  -\frac{7}{23}k  
+\end{cases}
+}
+$$
+
+\task $P_1 : x+y+z+1=0\quad$ et $\quad P_2 : 2x-y-z+3 = 1$
+$$
+\begin{cases}
+y & = k \\
+\text{et} &
+\begin{cases}
+x+k+z+1  & = 0  \\
+2x-k-z+2  & = 0 
+\end{cases}
+\end{cases}
+\Rightarrow
+\begin{cases}
+y & = k \\
+\text{et} &
+\begin{cases}
+x   &= -k-1-z  \\
+z   &= -k 
+\end{cases}
+\end{cases}
+$$
+$$
+\Rightarrow
+\begin{cases}
+y & = k \\
+\text{et} &
+\begin{cases}
+x  & = -1  \\
+z  & = -k 
+\end{cases}
+\end{cases}
+\Rightarrow
+\boxed{
+\begin{cases}
+x   &= -1  \\
+y   &= k \\
+z & = -k 
+\end{cases}
+}
+$$
+
+\end{tasks}
+\end{sol}
+
+
+
+L'intersection d'un plan ($P$) et d'une droite ($D$) en 3D est un point si le plan et la droite se coupent (c'est-à-dire que la normale au plan et le vecteur directeur de la droite ne sont pas orthogonaux). Les coordonnées $x$, $y$ et $z$ du point d'intersection appartiennent à la fois au plan ($P$) et à la droite ($D$). Elles satisfont donc aux équations suivantes, respectivement pour la droite et le plan :
+%
+$$
+\begin{cases}
+x & = A_x + d_x \times k \\
+y & = A_y + d_y \times k  \\
+z & = A_z + d_z \times k 
+\end{cases}
+\quad (k \in \mathbb{R})
+\qquad \text{et} \qquad
+a x + b y + c z + d  = 0
+$$
+%
+En insérant les équations paramétriques de la droite ($D$) dans l'équation cartésienne du plan ($P$), on obtient :
+%
+$$
+a (A_x + d_x \times k) + b (A_y + d_y \times k) + c (A_z + d_z \times k) + d  = 0
+$$
+%
+où la seule inconnue est le paramètre $k$ qui peut alors être déterminé :
+%
+$$
+(a d_x + b d_y + c d_z )k + (a A_x + b A_y + c A_z + d) = 0 
+$$
+%
+$$
+\Rightarrow k = \frac{-(a A_x + b A_y + c A_z + d)}{(a d_x + b d_y + c d_z )} 
+$$
+
+% un mot pour dire qu'il ne faut pas obligatoirement prendre cette relation comme une formule, mais plutôt comprendre comment y arriver. Dans la pratique, ce sera plus simple
+
+Une fois que la valeur de $k$ est trouvée, il suffit de l'utiliser dans les équations paramétriques de la droite pour finaliser le calcul des composante $x$, $y$ et $z$ du point d'intersection.
+
+
+\begin{comment}
+Schéma d'interprétation (à faire avec l'enseignant)
+%
+\ifthenelse{\equal{\showDrawings}{1}}{
+\begin{center}
+\includegraphics[height=6cm]{figs/intersectionDroitePlan.png}
+\end{center}
+}{\vspace*{6cm}} 
+\end{comment}
+
+
+\begin{exo}
+
+\noindent \ding{45} Déterminer le point d'intersection de la droite $\Delta$ et du plan $P$
+
+\begin{tasks}(1)
+\task Droite $\Delta$ passant par $(1\ 2\ 3)^T$ de vecteur directeur $(0\ 1\ -1)^T$ et plan $P$ d'équation $z -2 = 0$
+\task Droite $\Delta$ passant par $(0\ 0\ 0)^T$ de vecteur directeur $(1\ 1\ 2)^T$ et plan $P$ d'équation $3x+y-z -6= 0$
+\end{tasks}
+\end{exo}
+
+\begin{sol}
+\begin{tasks}(1)
+\task Droite $\Delta$ passant par $(1\ 2\ 3)^T$ de vecteur directeur $(0\ 1\ -1)^T$ et plan $P$ d'équation $z -2 = 0$
+$$
+\begin{cases}
+x & = 1 \\
+y & = 2 +  k  \\
+z & = 3 - k 
+\end{cases}
+\quad (k \in \mathbb{R})
+\qquad \text{et} \qquad
+z - 2  = 0
+$$
+$$
+\Rightarrow (3-k) -2 = 0 \Rightarrow \boxed{k = 1} \Rightarrow \Delta \cap P = \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}
+$$
+
+\task Droite $\Delta$ passant par $(0\ 0\ 0)^T$ de vecteur directeur $(1\ 1\ 2)^T$ et plan $P$ d'équation $3x+y-z -6 = 0$
+$$
+\begin{cases}
+x & = k \\
+y & = k  \\
+z & = 2k 
+\end{cases}
+\quad (k \in \mathbb{R})
+\qquad \text{et} \qquad
+3x+y-z - 6=0
+$$
+$$
+\Rightarrow 3k+k-2k = 6 \Rightarrow 2k = 6 \Rightarrow \boxed{k = 3} \Rightarrow \Delta \cap P = \begin{pmatrix} 3 \\ 3 \\ 6 \end{pmatrix}
+$$
+
+\end{tasks}
+\end{sol}
+
+
+

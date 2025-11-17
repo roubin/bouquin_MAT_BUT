@@ -1,0 +1,186 @@
+%!TEX root = main.tex
+
+
+\newcommand{\veccol}[2]{%
+  \begin{pmatrix}
+    #1 \\
+    #2
+  \end{pmatrix}
+}
+
+
+
+\chapter{Vecteurs dans le plan}
+\label{chapter:vecteurs}
+
+
+\section{Introduction}
+
+Les vecteurs sont des outils mathématiques fondamentaux qui permettent de représenter des grandeurs ayant à la fois une \textbf{direction}, un \textbf{sens} et une \textbf{intensité}. Dans le plan, les vecteurs sont utilisés pour modéliser des forces, des déplacements, des vitesses et bien d'autres phénomènes physiques. Pour les ingénieurs civils, la maîtrise des vecteurs est essentielle, car ils interviennent dans presque tous les aspects de la conception, de l'analyse et de la construction des infrastructures.
+
+Que ce soit pour calculer les forces agissant sur un pont, déterminer les contraintes dans une structure ou optimiser la disposition des éléments d'un bâtiment, les vecteurs offrent une méthode claire et précise pour analyser et résoudre des problèmes complexes.
+Illustrons cela avec un pont suspendu : ses câbles ont pour rôle de supporter à la fois le poids de la chaussée et celui des véhicules qui y circulent. Pour étudier les forces mises en jeu, les ingénieurs utilisent la notion de vecteurs. Chaque câble exerce une force de tension, représentée par un vecteur dirigé selon l'axe du câble.
+En appliquant les fonctions trigonométriques (abordées au chapitre précédent), cette force de tension peut être décomposée en deux composantes : une composante horizontale et une composante verticale. Pour assurer la stabilité du pont, il est indispensable que la résultante de l’ensemble des forces vectorielles, incluant notamment le poids du tablier, soit nulle (même si d’autres critères entrent en compte, nous nous concentrons ici sur cet équilibre). Cette condition permet alors de déterminer avec précision la tension nécessaire dans chaque câble pour contrebalancer le poids de l’ensemble de la structure.
+
+
+Ce chapitre a pour objectif de vous offrir une bonne compréhension des vecteurs dans le plan pour une application concrète en génie civil. 
+Vous y découvrirez comment définir et représenter des vecteurs avec ses coordonnées cartésiennes ou polaires, et vous aborderez les opérations fondamentales qui leur sont associées, comme l’addition, la soustraction, la multiplication par un scalaire, ou encore le calcul de normes et de distances. Vous explorerez également deux outils clés : le produit scalaire, utile pour déterminer des angles ou des projections, et le produit vectoriel (dans le plan, lié à la notion de déterminant), qui permet d'évaluer des aires ou des orientations par exemple. 
+Nous aborderons plus loin dans cet ouvrage une étude approfondie des vecteurs en trois dimensions, où ces notions prendront toute leur ampleur.
+
+
+\section{Composantes cartésiennes}
+
+Un vecteur $\vv{v}$ dans le plan peut être représenté par une paire de valeurs $x$ et  $y$ que l'on appel des \textbf{composantes} cartésiennes. On note généralement ces composantes en colonne 
+%
+\begin{equation*}
+\vv{v} = \veccol{v_x}{v_y} \qquad \text{ou bien en ligne} \quad \vv{v} = (v_x\ v_y)^T
+\end{equation*}
+%
+On verra au chapitre XX qu'il s'agit en fait d'une \textbf{transposition}, mais prenons le pour le moment comme une astuce de notation permettant une écriture plus compacte.
+
+La notation $\vv{AB}$ d'un vecteur spécifie explicitement que ce vecteur part du point $A$ vers le point $B$. 
+Pour identifier la position spatiale d'un point $P$, on peut utiliser les composantes du vecteur $\vv{OP}$. Ce point $O$ est généralement considéré comme l'origine. Il est courant de confondre la notion de coordonnées avec celle de composantes, mais ce n'est pas une grande faute, car cela n'apporte pas de confusion, ainsi la coordonnée ($x$, $y$) se notera :
+%
+\begin{equation*}
+\vv{OP} = \veccol{x}{y}  \quad \text{ou de façon équivalente} \quad P \veccol{x}{y}
+\end{equation*}
+
+
+% extrémité - origine
+
+
+
+\section{Somme, norme, produit scalaire et produit vectoriel}
+
+La \textbf{somme} de deux vecteurs $\vv{v}$ et $\vv{w}$ est le vecteur dont les composantes cartésiennes sont la somme des composantes respectives de $\vv{v}$ et $\vv{w}$. Par exemple :
+%
+\begin{equation*}
+\vv{v} + \vv{w} = \veccol{v_x}{v_y}  + \veccol{w_x}{w_y} = \veccol{v_x + w_x}{v_y + w_y}
+\end{equation*}
+%
+Ceci est assez intuitif et bien entendu valable pour une soustraction.
+
+% Norme
+
+
+
+
+Le \textbf{produit scalaire} de deux vecteurs $\vv{v}$ et $\vv{w}$ est un nombre réel obtenu en multipliant les composantes respectives de $\vv{v}$ et $\vv{w}$ : 
+%
+\begin{equation*}
+\vv{v} \cdot \vv{w} = \veccol{v_x}{v_y}  \cdot \veccol{w_x}{w_y} = v_x \times w_x + v_y \times w_y
+\end{equation*}
+
+% Bof
+Ce produit scalaire peut être vu comme une mesure du déplacement d'un vecteur dans le sens opposé à l'autre. Plus le produit scalaire est grand, plus les vecteurs sont directs ; plus il est nul ou inversement, plus les vecteurs sont orthogonaux.
+
+
+
+% produit vectoriel
+Le \textbf{produit vectoriel} de deux vecteurs $\vec{v}$ et $\vec{w}$ du plan est défini comme un vecteur perpendiculaire au plan, dont la norme correspond à l’aire du parallélogramme formé par $\vec{v}$ et $\vec{w}$, et dont le sens dépend de l’ordre des vecteurs.
+%
+On définit :
+%
+\begin{equation*}
+\vv{v} \wedge \vv{w} =  \veccol{v_x}{v_y}  \wedge \veccol{w_x}{w_y} =  (v_x w_y - v_y w_x)\, \vv{k}
+\end{equation*}
+%
+où $\vv{k}$ désigne le vecteur unitaire sortant perpendiculaire au plan.
+Ainsi,
+le vecteur $\vv{v} \wedge \vv{w}$ pointe dans le sens de $\vv{k}$ si la rotation de $\vv{v}$ vers $\vv{w}$ est \textbf{anti-horaire} ;
+il pointe dans le sens opposé si la rotation est \textbf{horaire} ;
+et il est nul si $\vv{v}$ et $\vv{w}$ sont colinéaires (nous reviendrons sur ce point un peu plus loin).
+
+
+La norme de ce produit vectoriel est donc 
+$\Vert \vv{v} \wedge \vv{w} \Vert =  \vert v_x w_y - v_y w_x \vert$
+ce qui correspond à l’aire du parallélogramme construit sur $\vv{v}$ et $\vv{w}$.
+
+
+
+
+\section{Composantes polaires}
+
+
+
+Exprimer des composante cartésiennes à partir de composantes polaires :
+
+\begin{equation*}
+\begin{cases}
+x = r \cos(\theta) \\
+y = r \sin(\theta) 
+\end{cases}
+\end{equation*}
+
+Exprimer des composante polaires à partir de composantes cartésiennes :
+
+\begin{equation*}
+\begin{cases}
+r = \sqrt{x^2 + y^2} \\
+\theta  = \text{arctan}\left(\dfrac{y}{x} \right) + 
+\begin{array}{|c|c|} \hline
+\pi & 0 \\ \hline
+-\pi & 0 \\ \hline
+\end{array}
+\qquad (x \ne 0 \text{ et } y \ne 0)
+\end{cases}
+\end{equation*}
+%
+où
+%
+\begin{equation*} 
+\begin{array}{|c|c|} \hline
+\pi & 0 \\ \hline
+-\pi & 0 \\ \hline
+\end{array}
+= 
+\begin{cases}
+\pi & \text{si } x < 0 \text{ et } y > 0 \\
+0 & \text{si } x > 0 \text{ et } y > 0 \\
+0 & \text{si } x > 0 \text{ et } y < 0 \\
+-\pi & \text{si } x < 0 \text{ et } y < 0 \\
+\end{cases}
+\end{equation*}
+
+Pour déterminer l'angle polaire $\theta$ lorsque $x=0$ ou $y=0$, il suffit de déduire intuitivement l'angle en se représentant le vecteur par la pensée :
+%
+\begin{equation*} 
+\begin{cases}
+\theta = 0 & \text{si } x > 0 \text{ et } y = 0 \\
+\theta = \frac{\pi}{2}  & \text{si } x = 0 \text{ et } y > 0 \\
+\theta = \frac{\pi}{2}  & \text{si } x = 0 \text{ et } y < 0 \\
+\theta = \pm \pi & \text{si } x < 0 \text{ et } y = 0 \\
+\end{cases}
+\end{equation*}
+
+
+
+
+\section{Droites dans le plan}
+
+Pour définir une droite $(\Delta)$, il faut un point $A$ de cette droite et une direction. La position du point $A$ peut être donnée par un vecteur $\vv{OA}$, et la direction par un \textbf{vecteur directeur} $\vv{d}$. Ainsi, la coordonnée ($x$, $y$) de tout point $M$ appartenant  à la droite $(\Delta)$ s'obtient avec :
+\begin{equation*}
+\vv{OM} = \vv{OA} + k \vv{d}
+\quad\text{où}\quad k \in \mathbb{R}
+\end{equation*}
+
+
+
+
+
+Intersection de 2 droites (il y a différentes solutions, on en ):
+
+s'assurer que le point d'intersection existe
+prendre l'équation cartésienne d'une première droite
+Utiliser l'équation paramétrique de la seconde droite pour exprimer  x et y en fonction de k.
+trouver k
+réinjecter cette valeur dans l'équation paramétrique de la seconde droite pour obtenir les coordonnées du point d'intersection
+
+
+\section{Projections orthogonales}
+
+
+
+
+
+
